@@ -1,0 +1,41 @@
+<div class="floating-cart-container small-cart">
+  <div class="container">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Cart Summary</h5>
+        <hr>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Total Items</span>
+            <span>{{ getCartItemCount() }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Total Price</span>
+            <span>${{ getTotalPrice() }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <h6>Cart Items Summary:</h6>
+    <div class="cart-items-container">
+      <div *ngFor="let cartItem of cartItems" class="card mb-4">
+        <img [src]="'http://127.0.0.1:8000' + cartItem.product.image" alt="Product" class="card-img-top small-img">
+        <div class="card-body">
+          <h5 class="card-title">{{ cartItem.product.name }}</h5>
+          <p class="card-text">Type: {{ cartItem.product.description }}</p>
+          <!-- <p class="card-text">Color: {{ cartItem.product.color }}</p> -->
+          <p class="card-text text-primary">${{ cartItem.product.price }}</p>
+          <div class="quantity-input">
+            <input type="number" class="form-control quantity-input-field" [(ngModel)]="cartItem.quantity">
+          </div>
+          <button class="btn btn-danger btn-sm remove-button" (click)="removeFromCart(cartItem)">Remove</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="checkout-button">
+      <button class="btn btn-success" (click)="proceedToCheckout()">Proceed To Checkout</button>
+    </div>
+  </div>
+</div>

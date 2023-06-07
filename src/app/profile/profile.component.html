@@ -1,0 +1,135 @@
+<header class="bg-dark py-2">
+  <div class="container px-4 px-lg-5 my-1">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Epsealon Israel</h1>
+      <p class="lead fw-normal text-white-50 mb-0">waga baga</p>
+    </div>
+  </div>
+</header>
+<app-navbar></app-navbar>
+
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4" *ngIf="currentProfile">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img [src]="'http://localhost:8000' + currentProfile.profileimage" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ currentProfile.username }}</h5>
+            <p class="text-muted mb-1">{{ currentProfile.firstname }} {{ currentProfile.lastname }}</p>
+            <p class="text-muted mb-4">{{ currentProfile.city }}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-dark mt-auto" (click)="fileInput.click()">Upload Photo</button>
+              <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)">
+              <button type="button" class="btn btn-danger mt-auto" (click)="openConfirmationModal(content)">Delete Profile</button>
+
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">Confirmation</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete your profile?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+                  <button type="button" class="btn btn-danger" (click)="deleteProfile(); modal.close()">Delete</button>
+                </div>
+              </ng-template>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8" *ngIf="currentProfile">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">First Name</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.firstname" class="form-control">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Last Name</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.lastname" class="form-control">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.email" class="form-control">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Mobile</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.phone_number" class="form-control">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">City</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.city" class="form-control">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Street</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.street" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Apartment number</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.apartmentnumber" class="form-control">
+              </div>
+            </div>
+            
+
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Zip Code</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="currentProfile.zipcode" class="form-control">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <button type="button" class="btn btn-outline-dark mt-auto" (click)="updateProfile()">Save
+                  Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

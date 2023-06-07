@@ -1,0 +1,28 @@
+.floating-cart-container {
+    position: fixed;
+    top: 80px; /* Adjust the top positioning as needed */
+    right: 20px; /* Adjust the right positioning as needed */
+    width: 400px;
+    z-index: 999;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 2px 0.8px rgba(122, 122, 122, 0.18);
+    border-radius: 5px;
+    padding: 40px;
+    overflow: auto;
+  }
+  
+  .small-img {
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+  }
+  
+  .small-cart {
+    width: 300px; /* Adjust the width as needed */
+    height: 400px; /* Adjust the height as needed */
+  }
+  
+  .cart-items-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
