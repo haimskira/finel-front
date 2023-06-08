@@ -11,7 +11,7 @@
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>Total Price</span>
-            <span>${{ getTotalPrice() }}</span>
+            <span>₪{{ getTotalPrice() }}</span>
           </li>
         </ul>
       </div>
@@ -25,7 +25,7 @@
           <h5 class="card-title">{{ cartItem.product.name }}</h5>
           <p class="card-text">Type: {{ cartItem.product.description }}</p>
           <!-- <p class="card-text">Color: {{ cartItem.product.color }}</p> -->
-          <p class="card-text text-primary">${{ cartItem.product.price }}</p>
+          <p class="card-text text-primary">₪{{ cartItem.product.price }}</p>
           <div class="quantity-input">
             <input type="number" class="form-control quantity-input-field" [(ngModel)]="cartItem.quantity">
           </div>

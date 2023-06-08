@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   Client_ID:
-  'Ad6Z0kyXRYX0kGfpTT0bVWWHVhK5guIzkyHYKZXFmsp5W421EDUyntc2Un7CH_k-iW2ILFmLbNyL1lTv',
+  'AbqHgXdzcxfTysKSGInhgbm7I3lS-Q4K6wcKmHAsIe4qHTKFq_CDirpR0IWbdnU2zht-24jElSph1_m9',
   };
 
 /*
@@ -15,4 +15,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

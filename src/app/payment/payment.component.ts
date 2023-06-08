@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { environment } from 'src/environments/environment';
+import { CartService } from '../shared/cart.service';
+import { CartItem } from '../shared/models/cart-item';
 
 @Component({
   selector: 'app-payment',
@@ -13,19 +15,44 @@ export class PaymentComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   showSuccess!: any;
   cartTotal!: any;
+  cartItems: CartItem[] = [];
 
-  constructor(private router: Router) {}
+
+
+  constructor(private router: Router,   public cartService: CartService    ) {}
 
   ngOnInit() {
     this.initConfig();
-    this.cartTotal =
-      JSON.parse(localStorage.getItem('cart_total') as any) || [];
-    console.log(this.cartTotal);
+    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      this.cartItems = items;
+      this.cartTotal = this.getTotalPrice();
+    });
+  }
+  
+  loadCartItems(): void {
+    if (this.cartService.cartItems.length === 0) {
+      this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+        this.cartItems = items;
+        this.cartTotal = this.getTotalPrice();
+      });
+    } else {
+      this.cartItems = this.cartService.cartItems;
+      this.cartTotal = this.getTotalPrice();
+    }
   }
 
+  getCartItemCount(): number {
+    return this.cartService.getCartItemCount();
+  }
+
+  getTotalPrice(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity * item.product.price, 0);
+  }
+  
+// #################################################################################################################################
   private initConfig(): void {
     this.payPalConfig = {
-      currency: 'EUR',
+      currency: 'ILS',
       clientId: `${environment.Client_ID}`,
       createOrderOnClient: (data) =>
         <ICreateOrderRequest>{
@@ -33,11 +60,11 @@ export class PaymentComponent implements OnInit {
           purchase_units: [
             {
               amount: {
-                currency_code: 'EUR',
+                currency_code: 'ILS',
                 value: `${this.cartTotal}`,
                 breakdown: {
                   item_total: {
-                    currency_code: 'EUR',
+                    currency_code: 'ILS',
                     value: `${this.cartTotal}`,
                   },
                 },
@@ -48,7 +75,7 @@ export class PaymentComponent implements OnInit {
                   quantity: '1',
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
-                    currency_code: 'EUR',
+                    currency_code: 'ILS',
                     value: `${this.cartTotal}`,
                   },
                 },
@@ -82,9 +109,10 @@ export class PaymentComponent implements OnInit {
           data
         );
         if (data.status === 'COMPLETED') {
-          this.router.navigate(['/success']);
+          this.router.navigate(['/']);
         }
         this.showSuccess = true;
+        window.alert('Transaction completed successfully!');
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);

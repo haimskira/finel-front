@@ -7,38 +7,59 @@
   </div>
 </header>
 <app-navbar></app-navbar>
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
-    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-      <div class="col mb-5" *ngFor="let cartItem of cartItems">
-        <div class="card h-100">
-          <!-- Product image -->
-          <img class="card-img-top" [src]="cartService.getImageUrlForProduct(cartItem.product)" alt="Product Image" />
-          <!-- Product details -->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name -->
-              <h5 class="fw-bolder">{{ cartItem.product.name }}</h5>
-              <!-- Product type -->
-              <p>Type: {{ cartItem.product.description }}</p>
-              <!-- Product color -->
-              <!-- <p>Color: {{ cartItem.product.color }}</p> -->
-              <!-- Product price -->
-              <p>${{ cartItem.product.price }}</p>
-              <!-- Quantity input and buttons -->
-              <div class="quantity-input">
-                <input type="number" class="form-control quantity-input-field" [(ngModel)]="cartItem.quantity">
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Cart Summary</h5>
+        <hr>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Total Items</span>
+            <span>{{ getCartItemCount() }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Total Price</span>
+            <span>₪{{ getTotalPrice() }}</span>
+          </li>
+        </ul>
+        <div class="checkout-button">
+          <a class="btn btn-success" routerLink="/payment">Proceed to Payment</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <!-- Rest of your code for product listing -->
+    <section class="py-5">
+      <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          <div class="col mb-5" *ngFor="let cartItem of cartItems">
+            <div class="card h-100">
+              <!-- Product image -->
+              <img class="card-img-top" [src]="cartService.getImageUrlForProduct(cartItem.product)" alt="Product Image" />
+              <!-- Product details -->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name -->
+                  <h5 class="fw-bolder">{{ cartItem.product.name }}</h5>
+                  <!-- Product type -->
+                  <p>Type: {{ cartItem.product.description }}</p>
+                  <!-- Product size -->
+                  <p>Size: {{ cartItem.product.size }}</p>
+                  <!-- Product price -->
+                  <p>₪{{ cartItem.product.price }}</p>
+                  <!-- Quantity input and buttons -->
+                  <div class="quantity-input">
+                    <input type="number" class="form-control quantity-input-field" [(ngModel)]="cartItem.quantity">
+                  </div>
+                  <button class="btn btn-danger btn-sm remove-button" (click)="removeFromCart(cartItem)">Remove</button>
+                </div>
               </div>
-              <button class="btn btn-danger btn-sm remove-button" (click)="removeFromCart(cartItem)">Remove</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="checkout-button">
-      <!-- <button class="btn btn-success" (click)="checkout()">Checkout</button> -->
-      <a class="btn btn-success" routerLink="/payment">Proceed to Payment</a>
-
-    </div>
+    </section>
   </div>
-</section>
+</div>

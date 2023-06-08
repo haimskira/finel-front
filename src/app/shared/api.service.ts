@@ -17,9 +17,9 @@ export class ApiService {
   }
 
   // Get a single product by ID
-  getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/product/${id}`);
-  }
+  // getProduct(id: number): Observable<Product> {
+  //   return this.http.get<Product>(`${this.baseUrl}/product/${id}`);
+  // }
 
   // Create a new product
   createProduct(product: Product): Observable<Product> {
@@ -36,5 +36,4 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/product/${id}`);
   }
 
-  // Add other methods for authentication and registration here
 }

@@ -18,10 +18,11 @@ export class CheckoutComponent implements OnInit {
     public cartService: CartService,
     private modal: NgbActiveModal
   ) { }
+
   ngOnInit(): void {
     this.loadCartItems();
   }
-  
+
   loadCartItems(): void {
     if (this.cartService.cartItems.length === 0) {
       this.cartService.getCartItems().subscribe((items: CartItem[]) => {
@@ -30,6 +31,14 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.cartItems = this.cartService.cartItems;
     }
+  }
+
+  getCartItemCount(): number {
+    return this.cartService.getCartItemCount();
+  }
+
+  getTotalPrice(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity * item.product.price, 0);
   }
   
   
