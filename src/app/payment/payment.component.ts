@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CartService } from '../shared/cart.service';
 import { CartItem } from '../shared/models/cart-item';
@@ -19,7 +20,7 @@ export class PaymentComponent implements OnInit {
 
 
 
-  constructor(private router: Router,   public cartService: CartService    ) {}
+  constructor(private router: Router,   public cartService: CartService, private http: HttpClient  ) {}
 
   ngOnInit() {
     this.initConfig();
@@ -109,11 +110,27 @@ export class PaymentComponent implements OnInit {
           data
         );
         if (data.status === 'COMPLETED') {
-          this.router.navigate(['/']);
+          const itemToPurchase = this.cartItems.find(item => item.id === item.id);
+      
+          if (itemToPurchase) {
+            // Create the purchase entry in Django
+            this.cartService.createPurchase(itemToPurchase).subscribe(
+              () => {
+                this.cartService.removeFromCart(itemToPurchase);
+                this.router.navigate(['/']);
+              },
+              (error) => {
+                console.error('Failed to create purchase:', error);
+              }
+            );
+      
+            this.showSuccess = true;
+            window.alert('Transaction completed successfully!');
+          } else {
+            console.log('Item not found in cart');
+          }
         }
-        this.showSuccess = true;
-        window.alert('Transaction completed successfully!');
-      },
+      },      
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
       },

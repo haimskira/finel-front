@@ -15,6 +15,8 @@ export class CartService {
   cartId?: number;
   private getUrl = 'http://localhost:8000/getcart/';
   private postUrl = 'http://localhost:8000/postcart/';
+  private purchaseURL = 'http://localhost:8000/purchase/';
+
 
 
   constructor(private http: HttpClient, private authService: AuthService) {
@@ -29,6 +31,18 @@ export class CartService {
         this.cartItems = [];
       }
     });
+  }
+
+  createPurchase(item: CartItem) {
+    const purchaseData = {
+      productId: item.product.id,
+      quantity: item.quantity,
+    };
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+    });
+    console.log("purchaseData = ",purchaseData);
+    return this.http.post(this.purchaseURL, purchaseData ,{headers});
   }
 
   public getImageUrlForProduct(product: Product): string {
