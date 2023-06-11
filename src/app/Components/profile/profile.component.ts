@@ -1,5 +1,5 @@
-import { Profile } from '../shared/models/profile.model';
-import { ProfileService } from '../shared/profile-service.service';
+import { Profile } from '../../shared/models/profile.model';
+import { ProfileService } from '../../shared/Services/profile-service.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class ProfileComponent implements OnInit {
   profiles: Profile[] = [];
   currentProfile: Profile | null = null;
+  purchases: any[] = [];
 
   constructor(
     private profileService: ProfileService,
@@ -35,6 +36,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loadProfile();
     this.profileService.fetchProfile();
+    this.getPurchaseHistory();
+
   }
 
   loadProfile(): void {
@@ -86,6 +89,23 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  getPurchaseHistory(): void {
+    this.profileService.getPurchaseHistory().subscribe(
+      (purchases: any[]) => {
+        this.purchases = purchases.map(purchase => {
+          const product = {
+            name: purchase.product_name,
+            price: purchase.product_price,
+            image: purchase.product_image  // Assign the actual image URL from the API response
+          };
+          return { ...purchase, product };
+        });
+      },
+      (error: any) => {
+        console.error('Failed to fetch purchase history:', error);
+      }
+    );
+  }
   
   private refreshPage(): void {
     this.location.go(this.location.path());

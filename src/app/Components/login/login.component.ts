@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from '../register/register.component';
-import { AuthService } from '../shared/auth-service.service';
+import { AuthService } from '../../shared/Services/auth-service.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -4,8 +4,8 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CartService } from '../shared/cart.service';
-import { CartItem } from '../shared/models/cart-item';
+import { CartService } from '../../shared/Services/cart.service';
+import { CartItem } from '../../shared/models/cart-item';
 
 @Component({
   selector: 'app-payment',

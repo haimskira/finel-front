@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from './models/product';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +15,6 @@ export class ApiService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.baseUrl}/product`);
   }
-
-  // Get a single product by ID
-  // getProduct(id: number): Observable<Product> {
-  //   return this.http.get<Product>(`${this.baseUrl}/product/${id}`);
-  // }
 
   // Create a new product
   createProduct(product: Product): Observable<Product> {

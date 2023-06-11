@@ -109,8 +109,6 @@
                 <input type="text" [(ngModel)]="currentProfile.apartmentnumber" class="form-control">
               </div>
             </div>
-            
-
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Zip Code</p>
@@ -123,8 +121,7 @@
             <div class="row">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
-                <button type="button" class="btn btn-outline-dark mt-auto" (click)="updateProfile()">Save
-                  Changes</button>
+                <button type="button" class="btn btn-outline-dark mt-auto" (click)="updateProfile()">Save Changes</button>
               </div>
             </div>
           </div>
@@ -132,4 +129,21 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-12" *ngIf="purchases && purchases.length > 0">
+      <h2>Order History</h2>
+      <div class="row">
+        <div class="col-lg-4" *ngFor="let purchase of purchases">
+          <div class="card mb-4">
+            <div class="card-body">
+              <img [src]="'http://localhost:8000'+purchase.product.image" alt="product image" class="img-fluid">
+              <h5 class="my-3">{{ purchase.product.name }}</h5>
+              <p class="text-muted mb-1">Quantity: {{ purchase.quantity }}</p>
+              <p class="text-muted mb-4">Purchase Date: {{ purchase.purchase_date }}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>

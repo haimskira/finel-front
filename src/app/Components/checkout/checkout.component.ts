@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/auth-service.service';
-import { CartItem } from '../shared/models/cart-item';
-import { CartService } from '../shared/cart.service';
+import { AuthService } from '../../shared/Services/auth-service.service';
+import { CartItem } from '../../shared/models/cart-item';
+import { CartService } from '../../shared/Services/cart.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

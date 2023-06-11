@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
-import { Profile } from '../shared/models/profile.model';
+import { Profile } from '../models/profile.model';
 
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Profile } from '../shared/models/profile.model';
 export class ProfileService {
   public profile: any;
   private apiUrl = 'http://127.0.0.1:8000/getprofile/';
-  private imageUrl ='http://127.0.0.1:8000/getprofile/'
+  private purchaseUrl = 'http://127.0.0.1:8000/profile/purchases/';
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,16 @@ export class ProfileService {
       'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
     });
   }
+  getPurchaseHistory(): Observable<any[]> {
+    return this.http.get<any[]>(this.purchaseUrl, { headers: this.getHeaders() })
+      .pipe(
+        catchError((error) => {
+          console.error('Failed to fetch purchases:', error);
+          return throwError(error);
+        })
+      );
+  }
+  
 
   updateProfile(profile: Profile): Observable<Profile> {
     const url = `${this.apiUrl}${profile.pk}`;
@@ -90,4 +100,5 @@ export class ProfileService {
     );
   }
   
+
 }

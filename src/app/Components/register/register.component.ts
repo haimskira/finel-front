@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../shared/auth-service.service';
+import { AuthService } from '../../shared/Services/auth-service.service';
 
 @Component({
   selector: 'app-register',

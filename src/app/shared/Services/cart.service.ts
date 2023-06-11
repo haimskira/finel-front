@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth-service.service';
-import { CartItem } from '../shared/models/cart-item';
-import { Product } from './models/product';
+import { CartItem } from '../models/cart-item';
+import { Product } from '../models/product';
 import { Observable, map, tap,of } from 'rxjs';
 
 @Injectable({

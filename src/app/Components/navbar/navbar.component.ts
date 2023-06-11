@@ -1,7 +1,7 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
-import { AuthService } from '../shared/auth-service.service';
-import { CartService } from '../shared/cart.service';
+import { AuthService } from '../../shared/Services/auth-service.service';
+import { CartService } from '../../shared/Services/cart.service';
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 
 @Component({
