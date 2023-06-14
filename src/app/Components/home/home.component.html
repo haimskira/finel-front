@@ -15,7 +15,8 @@
       <div class="col mb-5" *ngFor="let product of products">
         <div class="card h-100">
           <!-- Product image -->
-          <img class="card-img-top" [src]="product.image_url" alt="Product Image" />
+          <img class="card-img-top" [src]="'http://127.0.0.1:8000' + product.image"  alt="Product Image" />
+
           <!-- Product details -->
           <div class="card-body p-4">
             <div class="text-center">

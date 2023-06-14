@@ -12,7 +12,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/login/';
+  private loginUrl = 'http://127.0.0.1:8000/login/';
   private registerUrl = 'http://127.0.0.1:8000/register/';
   private accessToken = 'accessToken';
   loggedIn: boolean;
@@ -46,7 +46,7 @@ export class AuthService {
 
   login(user: User) {
     const body = { username: user.username, password: user.password };
-    return this.http.post(this.apiUrl, body).pipe(
+    return this.http.post(this.loginUrl, body).pipe(
       tap((response: any) => {
         const token = response.token;
         localStorage.setItem(this.accessToken, token);

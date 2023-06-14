@@ -353,7 +353,8 @@ button,
 select,
 optgroup,
 textarea {
-  margin: 0;
+  margin-top: 2px;
+  display: flex;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;

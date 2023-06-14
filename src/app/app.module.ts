@@ -40,7 +40,7 @@ import { PaymentComponent } from './Components/payment/payment.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [NgbActiveModal], // Provide NgbActiveModal here
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

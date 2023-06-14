@@ -7,28 +7,28 @@ import { Product } from '../models/product';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://127.0.0.1:8000';
+  private baseUrl = 'http://127.0.0.1:8000/product';
 
   constructor(private http: HttpClient) {}
 
   // Get all products
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/product`);
+    return this.http.get<Product[]>(this.baseUrl);
   }
 
   // Create a new product
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.baseUrl}/product`, product);
+    return this.http.post<Product>(this.baseUrl, product);
   }
 
   // Update an existing product
   updateProduct(id: number, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.baseUrl}/product/${id}`, product);
+    return this.http.put<Product>(`${this.baseUrl}/${id}`, product);
   }
 
   // Delete a product
   deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/product/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
 }

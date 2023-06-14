@@ -20,14 +20,14 @@ export class HomeComponent implements OnInit {
 
   loadProducts() {
     this.apiService.getProducts().subscribe(
-      (products: Product[]) => {
-        // console.log(products);
-        
+      (products: Product[]) => {        
         this.products = products.map(product => ({
           ...product,
-          image_url: `http://localhost:8000${product.image}`,
+          // image_url: `http://localhost:8000${product.image}`,
+          
           quantity: 0
-        }));
+        })) ,console.log(this.products);
+        ;
       },
       error => {
         console.log('Error:', error);

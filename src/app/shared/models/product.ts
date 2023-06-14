@@ -9,5 +9,5 @@ export interface Product {
   image: string;
   type: string;
   color: string;
-  imageUrl: string;
+  // imageUrl: string;
 }

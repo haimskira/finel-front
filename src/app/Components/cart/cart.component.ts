@@ -21,37 +21,42 @@ export class CartComponent implements OnInit {
   }
 
   loadCartItems(): void {
+    // console.log('loadCartItems');
     this.cartService.getCartItems().subscribe((items: CartItem[]) => {
       this.cartItems = items;
-      // console.log("cart ts. loadcartItems =", this.cartItems);
     });
   }
 
   proceedToCheckout() {
+    // console.log('proceedToCheckout');
     this.router.navigate(['/checkout']);
   }
 
-  decreaseQuantity(cartItem: CartItem) {
-    if (cartItem.quantity > 1) {
-      cartItem.quantity--;
-    }
-  }
+  // decreaseQuantity(cartItem: CartItem) {
+  //   console.log('decreaseQuantity');
+  //   if (cartItem.quantity > 1) {
+  //     cartItem.quantity--;
+  //   }
+  // }
 
-  increaseQuantity(cartItem: CartItem) {
-    cartItem.quantity++;
-  }
+  // increaseQuantity(cartItem: CartItem) {
+  //   console.log('increaseQuantity');
+  //   cartItem.quantity++;
+  // }
 
   removeFromCart(cartItem: CartItem) {
-    console.log(cartItem.id);
+    // console.log('removeFromCart');
+    // console.log(cartItem.id);
     this.cartService.removeFromCart(cartItem);
   }
-  
 
   getCartItemCount(): number {
+    // console.log('getCartItemCount');
     return this.cartItems.reduce((count, cartItem) => count + cartItem.quantity, 0);
   }
 
   getTotalPrice(): number {
+    // console.log('getTotalPrice');
     return this.cartItems.reduce((total, cartItem) => total + cartItem.product.price * cartItem.quantity, 0);
   }
 }
